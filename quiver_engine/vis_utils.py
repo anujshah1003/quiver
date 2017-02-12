@@ -7,19 +7,19 @@ from quiver_engine.layer_result_generators import get_outputs_generator
 def save_layer_outputs(input_img, model, layer_name, temp_folder, input_path):
 
     with get_evaluation_context():
-        layer_outputs = get_outputs_generator(model, layer_name)(input_img)[0]
-
+        layer_outputs = get_outputs_generator(model, layer_name)(input_img)
         if K.backend() == 'theano':
             #correct for channel location difference betwen TF and Theano
+            # TODO: check if this still works
             layer_outputs = np.rollaxis(layer_outputs, 0, 3)
 
         return [
             save_layer_img(
-                layer_outputs[:, :, channel],
+                layer_output,
                 layer_name,
-                channel,
+                idx,
                 temp_folder,
                 input_path
             )
-            for channel in range(0, layer_outputs.shape[2])
+            for (idx, layer_output) in enumerate(layer_outputs)
         ]

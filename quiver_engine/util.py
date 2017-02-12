@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, print_function
 import json
+from flask.json import jsonify
 import numpy as np
 from keras.preprocessing import image
 import keras.backend as K
