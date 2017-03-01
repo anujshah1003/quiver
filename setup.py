@@ -13,7 +13,7 @@ setup(
     package_data={'quiver_engine': 'quiverboard/dist/*'},
     install_requires=[
         'keras',
-        'tensorflow',
+        'theano',
         'flask',
         'flask_cors',
         'gevent',
